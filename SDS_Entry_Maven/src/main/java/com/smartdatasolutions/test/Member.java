@@ -1,5 +1,7 @@
 package com.smartdatasolutions.test;
 
+import java.util.Objects;
+
 public class Member {
 
 	private String	id;
@@ -67,8 +69,27 @@ public class Member {
 	}
 
 	public String toCSVString( ) {
-		//TODO implement this
-		return null;
+
+        String csvString = String.format("%s,%s,%s,%s,%s,%s",
+				this.getId(),
+				this.getFirstName(),
+				this.getLastName(),
+				this.getAddress(),
+				this.getCity(),
+				this.getZip());
+		return  csvString;
 	}
 
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		Member member = (Member) o;
+		return Objects.equals(id, member.id);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id);
+	}
 }
